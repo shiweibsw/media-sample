@@ -1,3 +1,7 @@
+include ':vm05'
+include ':vm04'
+include ':vm03'
+include ':vm02'
 include ':vm01'
 include ':vm08'
 include ':vm07'
