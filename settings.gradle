@@ -1,3 +1,4 @@
+include ':vm01'
 include ':vm08'
 include ':vm07'
 include ':vm06'

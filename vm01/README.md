@@ -1,0 +1,1 @@
+# 使用SurfaceView 加载一张图片
