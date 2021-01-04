@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/vm06" />
             <option value="$PROJECT_DIR$/vm07" />
             <option value="$PROJECT_DIR$/vm08" />
+            <option value="$PROJECT_DIR$/vm09" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
