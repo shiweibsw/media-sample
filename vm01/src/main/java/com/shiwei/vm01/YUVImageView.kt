@@ -14,7 +14,7 @@ import android.view.View
  */
 class YUVImageView : SurfaceView {
     private lateinit var surfaceHolder: SurfaceHolder
-    private lateinit var canvas: Canvas
+    private var canvas: Canvas? = null
     private lateinit var bitmap: Bitmap
     private lateinit var options: BitmapFactory.Options
     private lateinit var paint: Paint
@@ -64,12 +64,14 @@ class YUVImageView : SurfaceView {
 
     fun drawBitmap(id: Int) {
         canvas = surfaceHolder.lockCanvas()
-        canvas.drawColor(Color.BLUE)
-        bitmap = BitmapFactory.decodeResource(resources, id, options)
+        if (canvas != null) {
+            canvas?.drawColor(Color.BLUE)
+            bitmap = BitmapFactory.decodeResource(resources, id, options)
 //        var matrix=Matrix()
 //        matrix.setScale((640/options.outWidth).toFloat(),(480/options.outHeight).toFloat())
 //        canvas.drawBitmap(bitmap,matrix,paint)
-        canvas.drawBitmap(bitmap, srcRect, destRect, paint)
+            canvas?.drawBitmap(bitmap, srcRect, destRect, paint)
+        }
         surfaceHolder.unlockCanvasAndPost(canvas)
     }
 }

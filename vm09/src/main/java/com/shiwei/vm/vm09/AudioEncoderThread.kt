@@ -9,6 +9,21 @@ import java.lang.ref.WeakReference
  * @Email shiweibsw@gmail.com
  */
 class AudioEncoderThread(muxer: WeakReference<MediaMuxerThread>) : Thread() {
+    private val lock = Object()
+
+    @Volatile
+    private var isMuxerReady = false
+
+    /**
+     * MediaMuxer 是否准备完成
+     */
+    fun setMuxerReady(isMuxerReady: Boolean) {
+        synchronized(lock) {
+            this.isMuxerReady = isMuxerReady
+            lock.notify()
+        }
+    }
+
 
     override fun run() {
 
