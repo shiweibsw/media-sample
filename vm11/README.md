@@ -1,0 +1,1 @@
+# OpenGL ES基本的环境配置(创建一个简单的Android应用然后使用OpenGL展示一个黑板)

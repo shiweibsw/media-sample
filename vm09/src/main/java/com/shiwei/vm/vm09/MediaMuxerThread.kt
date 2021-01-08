@@ -24,7 +24,9 @@ object MediaMuxerThread : Thread() {
     private var mediaMuxer: MediaMuxer? = null
     private var width = 0
     private var height = 0
-    private var lock = Object();
+    private var lock = Object()
+    private var videoTrackIndex = -1
+    private var audioTrackIndex = -1
 
     @Volatile
     private var isFinished = false
@@ -39,7 +41,7 @@ object MediaMuxerThread : Thread() {
     fun startMuxer(width: Int, height: Int) {
         this.width = width
         this.height = height
-        run()
+        start()
     }
 
     /**
@@ -56,9 +58,11 @@ object MediaMuxerThread : Thread() {
                     readyStart(fileSwapHelper.nextFileName)
                 } else {
                     var data = muxerDatas.removeAt(0)//removeAt 返回的是移除的对象
-                    var track=0
-                    if (data.trackIndex== TRACK_VIDEO){
-
+                    var track = 0
+                    if (data.trackIndex == TRACK_VIDEO) {
+                        track = videoTrackIndex
+                    } else {
+                        track = audioTrackIndex
                     }
                 }
 

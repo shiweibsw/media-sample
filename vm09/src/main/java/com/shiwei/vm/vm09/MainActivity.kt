@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), Camera.PreviewCallback, SurfaceHolder.
         surfaceHolder.addCallback(this)
         btnStart.setOnClickListener {
             if (!isRecording) {//开始
-                MediaMuxerThread.startMuxer()
+                MediaMuxerThread.startMuxer(width, height)
             } else {//结束
 
             }

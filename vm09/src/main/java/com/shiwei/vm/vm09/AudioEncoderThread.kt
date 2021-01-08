@@ -1,7 +1,7 @@
 package com.shiwei.vm.vm09
 
-import android.content.Context
 import java.lang.ref.WeakReference
+import java.nio.ByteBuffer
 
 /**
  * @Author shiwei
@@ -10,9 +10,16 @@ import java.lang.ref.WeakReference
  */
 class AudioEncoderThread(muxer: WeakReference<MediaMuxerThread>) : Thread() {
     private val lock = Object()
+    val SAMPLES_PER_FRAME = 1024
 
     @Volatile
     private var isMuxerReady = false
+
+    @Volatile
+    private var isFinished = false
+
+    @Volatile
+    private var isStart = false
 
     /**
      * MediaMuxer 是否准备完成
@@ -24,8 +31,36 @@ class AudioEncoderThread(muxer: WeakReference<MediaMuxerThread>) : Thread() {
         }
     }
 
+    fun finish() {
+        isFinished = true
+    }
+
+    private fun startMediaCodec() {
+
+    }
+
+    private fun stopMediaCodec() {
+
+    }
+
 
     override fun run() {
+        var byteBuffer = ByteBuffer.allocate(SAMPLES_PER_FRAME)
+        while (!isFinished) {
+            /*启动或者重启*/
+            if (!isStart) {
+                stopMediaCodec()
+                if (!isMuxerReady) {
+                    synchronized(lock) {
+                        lock.wait()
+                    }
+                } else {
+                    startMediaCodec()
+                }
+            } else {
+                byteBuffer.clear()
+            }
 
+        }
     }
 }
